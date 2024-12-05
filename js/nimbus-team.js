@@ -1,6 +1,6 @@
 class NimbusTeam extends HTMLElement {
   static #selectors = {
-    UserCardTmpl: "#nimbus-team-user-card-tmpl",
+    UserCardTmpl: "nimbus-team-user-card-tmpl",
   };
 
   #shadow;
