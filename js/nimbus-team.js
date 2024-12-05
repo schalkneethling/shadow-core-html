@@ -8,6 +8,7 @@ class NimbusTeam extends HTMLElement {
   constructor() {
     super();
     this.#shadow = this.attachShadow({ mode: "open" });
+    this.#loadCSS();
   }
 
   connectedCallback() {
@@ -18,6 +19,26 @@ class NimbusTeam extends HTMLElement {
     if (template) {
       const content = template.content.cloneNode(true);
       this.#shadow.appendChild(content);
+    }
+  }
+
+  /**
+   * Asynchronously loads a CSS file and appends it's content to the shadow DOM.
+   *
+   * This method creates a <style> element, fetches the CSS content from the specified URL,
+   * and appends the CSS content to the shadow DOM if the fetch request is successful.
+   *
+   * @private
+   * @async
+   * @returns {Promise<void>} A promise that resolves when the CSS is loaded and appended.
+   */
+  async #loadCSS() {
+    const style = document.createElement("style");
+    const response = await fetch("css/user-card.css");
+
+    if (response.ok) {
+      style.textContent = await response.text();
+      this.#shadow.appendChild(style);
     }
   }
 }
