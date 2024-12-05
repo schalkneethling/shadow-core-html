@@ -12,13 +12,18 @@ class NimbusTeam extends HTMLElement {
   }
 
   connectedCallback() {
+    const listContainer = document.createElement("ul");
     const template = document.getElementById(
       NimbusTeam.#selectors.UserCardTmpl
     );
 
     if (template) {
       const content = template.content.cloneNode(true);
-      this.#shadow.appendChild(content);
+
+      listContainer.classList.add("card-list");
+      listContainer.appendChild(content);
+
+      this.#shadow.appendChild(listContainer);
     }
   }
 
