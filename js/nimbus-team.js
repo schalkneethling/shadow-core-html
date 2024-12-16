@@ -78,20 +78,20 @@ class NimbusTeam extends HTMLElement {
       phone.textContent = user.telephone;
       phone.href = `tel:${user.telephone}`;
 
-      bluesky.href = user.bluesky;
+      bluesky.href = user.social.bluesky.url;
       bluesky.querySelector("span").textContent = accText
         .replace("@employee", user.firstName)
-        .replace("@platform", "Bluesky");
+        .replace("@platform", user.social.bluesky.name);
 
-      linkedin.href = user.linkedin;
+      linkedin.href = user.social.linkedin.url;
       linkedin.querySelector("span").textContent = accText
         .replace("@employee", user.firstName)
-        .replace("@platform", "LinkedIn");
+        .replace("@platform", user.social.linkedin.name);
 
-      mastodon.href = user.mastodon;
+      mastodon.href = user.social.mastodon.url;
       mastodon.querySelector("span").textContent = accText
         .replace("@employee", user.firstName)
-        .replace("@platform", "Mastodon");
+        .replace("@platform", user.social.mastodon.name);
 
       listContainer.appendChild(userCard);
     });
@@ -121,7 +121,7 @@ class NimbusTeam extends HTMLElement {
 
   async #loadUsers() {
     const response = await fetch(
-      "https://fictionalfolks.netlify.app/.netlify/functions/users?count=1"
+      "https://fictionalfolks.netlify.app/.netlify/functions/users"
     );
 
     if (response.ok) {
